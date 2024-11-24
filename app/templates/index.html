@@ -1,0 +1,77 @@
+<!--TODO: hide video player controls, fit video to page margins-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>algopull.io</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">algopull.io</div>
+        </header>
+
+        <main>
+            <div id="video-container" class="video-container">
+                <video id="video-player" 
+                       autoplay 
+                       controls 
+                       onclick="loadRandomVideo()"
+                       loop
+                       playsinline>
+                    Your browser does not support the video element.
+                </video>
+                <div class="video-overlay">
+                    <span>Tap for next video</span>
+                </div>
+            </div>
+        </main>
+
+        <button id="add-pull-btn" class="add-pull-button" onclick="openModal()">+</button>
+
+        <div id="submit-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add New Video</h2>
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="platform-select">Platform</label>
+                    <select id="platform-select">
+                        <option value="tiktok">TikTok</option>
+                        <option value="instagram">Instagram Reel</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="video-url">Video URL</label>
+                    <input type="url" 
+                           id="video-url" 
+                           placeholder="Paste video URL here"
+                           autocomplete="off">
+                </div>
+
+                <div class="captcha-container">
+                    <div class="cf-turnstile" 
+                         data-sitekey="{{ config['CLOUDFLARE_SITE_KEY'] }}"
+                         data-callback="enableSubmit">
+                    </div>
+                </div>
+
+                <button id="submit-btn" class="submit-button" disabled>
+                    <span class="button-text">Submit</span>
+                    <div class="loading-spinner"></div>
+                </button>
+                
+                <div id="status-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
