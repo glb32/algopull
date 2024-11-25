@@ -15,19 +15,19 @@
         </header>
 
         <main>
-            <div id="video-container" class="video-container">
-                <video id="video-player" 
-                       autoplay 
-                       controls 
-                       onclick="loadRandomVideo()"
-                       loop
-                       playsinline>
-                    Your browser does not support the video element.
-                </video>
-                <div class="video-overlay">
-                    <span>Tap for next video</span>
-                </div>
+      
+        <div id="video-container" class="video-container">
+            <video id="video-player" 
+                autoplay 
+                loop
+                playsinline>
+                Your browser does not support the video element.
+            </video>
+            <div class="video-click-area" onclick="loadRandomVideo()"></div>
+            <div class="video-overlay">
+                <span>Tap for next video</span>
             </div>
+        </div>
         </main>
 
         <button id="add-pull-btn" class="add-pull-button" onclick="openModal()">+</button>
@@ -58,7 +58,8 @@
                 <div class="captcha-container">
                     <div class="cf-turnstile" 
                          data-sitekey="{{ config['CLOUDFLARE_SITE_KEY'] }}"
-                         data-callback="enableSubmit">
+                         data-callback="enableSubmit"
+                         data-reset-callback="disableSubmit">
                     </div>
                 </div>
 

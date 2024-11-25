@@ -1,5 +1,6 @@
 from flask import Flask
 from app.config import Config
+from app.routes import main
 import os
 
 def create_app(config_class=Config):
@@ -10,8 +11,6 @@ def create_app(config_class=Config):
     cdn_path = os.path.join(app.root_path, 'cdn')
     if not os.path.exists(cdn_path):
         os.makedirs(cdn_path)
-
-    from app.routes import main
     app.register_blueprint(main)
-
+    
     return app
